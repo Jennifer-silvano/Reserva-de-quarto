@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Haven - Reservas de Hotel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #d4af37;
+            --accent-color: #34495e;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--light-color);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            bottom: -5px;
+            left: 0;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .auth-buttons .btn {
+            margin-left: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--secondary-color);
+            color: var(--secondary-color);
+        }
+
+        .btn:hover {
+            background-color: #c19b2c;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--secondary-color);
+            color: var(--white);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(44, 62, 80, 0.7)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        /* Booking Form */
+        .booking-form {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-top: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Room Gallery */
+        .room-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .room-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .room-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .room-img {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .room-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .room-card:hover .room-img img {
+            transform: scale(1.05);
+        }
+
+        .room-info {
+            padding: 20px;
+        }
+
+        .room-info h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .room-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        .price {
+            font-weight: 600;
+            color: var(--secondary-color);
+            font-size: 20px;
+        }
+
+        .room-status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .available {
+            background-color: rgba(46, 204, 113, 0.1);
+            color: #2ecc71;
+        }
+
+        .booked {
+            background-color: rgba(231, 76, 60, 0.1);
+            color: #e74c3c;
+        }
+
+        /* Services Section */
+        .services {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .services .section-title h2 {
+            color: var(--white);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--accent-color);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-icon {
+            font-size: 40px;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            margin-bottom: 15px;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background-color: var(--light-color);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .testimonial-author h4 {
+            margin-bottom: 5px;
+        }
+
+        .testimonial-rating {
+            color: var(--secondary-color);
+        }
+
+        /* Staff Section */
+        .staff {
+            background-color: var(--white);
+        }
+
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .staff-card {
+            background-color: var(--light-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .staff-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .staff-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .staff-info {
+            padding: 20px;
+        }
+
+        .staff-info h3 {
+            margin-bottom: 5px;
+        }
+
+        .staff-position {
+            color: var(--secondary-color);
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .staff-shift {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 2px;
+            background-color: var(--secondary-color);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            color: var(--white);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--accent-color);
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            margin: 80px auto;
+            max-width: 800px;
+            width: 90%;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: modalopen 0.5s;
+        }
+
+        @keyframes modalopen {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            color: var(--primary-color);
+        }
+
+        .close-modal {
+            font-size: 24px;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--secondary-color);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #2ecc71;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 4px;
+            box-shadow: var(--shadow);
+            z-index: 3000;
+            display: none;
+            animation: slideIn 0.5s, fadeOut 0.5s 2.5s;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        /* Rating Stars */
+        .rating {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+        }
+
+        .rating input {
+            display: none;
+        }
+
+        .rating label {
+            color: #ddd;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0 5px;
+        }
+
+        .rating input:checked ~ label {
+            color: var(--secondary-color);
+        }
+
+        .rating label:hover,
+        .rating label:hover ~ label {
+            color: var(--secondary-color);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 60px 0;
+            }
+
+            .section-title h2 {
+                font-size: 30px;
+            }
+
+            .room-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .btn {
+                padding: 8px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">Luxury<span>Haven</span></a>
+                
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#rooms">Quartos</a></li>
+                    <li><a href="#services">Serviços</a></li>
+                    <li><a href="#staff">Funcionários</a></li>
+                    <li><a href="#testimonials">Avaliações</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+                
+                <div class="auth-buttons">
+                    <a href="#" class="btn btn-outline" id="login-btn">Login</a>
+                    <a href="#" class="btn" id="register-btn">Cadastre-se</a>
+                </div>
+                
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Experiência de Hospedagem Excepcional</h1>
+                <p>Descubra o conforto e luxo em nosso hotel premiado. Reserve agora e ganhe 10% de desconto na sua primeira estadia.</p>
+                <a href="#booking" class="btn">Reserve Agora</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section class="section" id="booking">
+        <div class="container">
+            <div class="section-title">
+                <h2>Faça sua reserva</h2>
+            </div>
+            
+            <form class="booking-form" id="availability-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="check-in">Check-in</label>
+                        <input type="date" id="check-in" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="check-out">Check-out</label>
+                        <input type="date" id="check-out" class="form-control" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="adults">Adultos</label>
+                        <select id="adults" class="form-control" required>
+                            <option value="1">1 Adulto</option>
+                            <option value="2">2 Adultos</option>
+                            <option value="3">3 Adultos</option>
+                            <option value="4">4 Adultos</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="children">Crianças</label>
+                        <select id="children" class="form-control" required>
+                            <option value="0">0 Crianças</option>
+                            <option value="1">1 Criança</option>
+                            <option value="2">2 Crianças</option>
+                            <option value="3">3 Crianças</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="room-type">Tipo de Quarto</label>
+                    <select id="room-type" class="form-control" required>
+                        <option value="all">Todos os Tipos</option>
+                        <option value="standard">Standard</option>
+                        <option value="deluxe">Deluxe</option>
+                        <option value="suite">Suíte</option>
+                        <option value="presidential">Presidencial</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn" style="width: 100%;">Ver Disponibilidade</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Rooms Section -->
+    <section class="section bg-light" id="rooms">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossos Quartos</h2>
+                <p>Conforto e elegância em cada detalhe</p>
+            </div>
+            
+            <div class="room-gallery">
+                <!-- Room 1 -->
+                <div class="room-card">
+                    <div class="room-img">
+                        <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Suíte Presidencial">
+                    </div>
+                    <div class="room-info">
+                        <h3>Suíte Presidencial</h3>
+                        <div class="room-meta">
+                            <span><i class="fas fa-user"></i> 2 Adultos</span>
+                            <span><i class="fas fa-expand"></i> 65 m²</span>
+                        </div>
+                        <p>Suíte espaçosa com vista para o mar, sala de estar separada e banheiro de luxo.</p>
+                        <div class="room-footer">
+                            <span class="price">R$ 1.200/noite</span>
+                            <span class="room-status available">Disponível</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Room 2 -->
+                <div class="room-card">
+                    <div class="room-img">
+                        <img src="https://images.squarespace-cdn.com/content/v1/60d9c242b704170d76d4eb33/1688052972789-KC1QYPCN5UOX7W7I2GKC/SUITE+1.jpg?format=500w" alt="Suíte Executiva">
+                    </div>
+                    <div class="room-info">
+                        <h3>Suíte Executiva</h3>
+                        <div class="room-meta">
+                            <span><i class="fas fa-user"></i> 2 Adultos</span>
+                            <span><i class="fas fa-expand"></i> 45 m²</span>
+                        </div>
+                        <p>Suíte moderna com área de trabalho, minibar e vista para a cidade.</p>
+                        <div class="room-footer">
+                            <span class="price">R$ 850/noite</span>
+                            <span class="room-status available">Disponível</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Room 3 -->
+                <div class="room-card">
+                    <div class="room-img">
+                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Quarto Deluxe">
+                    </div>
+                    <div class="room-info">
+                        <h3>Quarto Deluxe</h3>
+                        <div class="room-meta">
+                            <span><i class="fas fa-user"></i> 2 Adultos</span>
+                            <span><i class="fas fa-expand"></i> 35 m²</span>
+                        </div>
+                        <p>Quarto espaçoso com cama king size, TV de tela plana e banheiro moderno.</p>
+                        <div class="room-footer">
+                            <span class="price">R$ 650/noite</span>
+                            <span class="room-status booked">Reservado</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Room 4 -->
+                <div class="room-card">
+                    <div class="room-img">
+                        <img src="https://images.unsplash.com/photo-1564078516393-cf04bd966897?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Quarto Standard">
+                    </div>
+                    <div class="room-info">
+                        <h3>Quarto Standard</h3>
+                        <div class="room-meta">
+                            <span><i class="fas fa-user"></i> 2 Adultos</span>
+                            <span><i class="fas fa-expand"></i> 28 m²</span>
+                        </div>
+                        <p>Quarto confortável com todas as comodidades necessárias para uma estadia agradável.</p>
+                        <div class="room-footer">
+                            <span class="price">R$ 450/noite</span>
+                            <span class="room-status available">Disponível</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Serviços Extras</h2>
+                <p>Melhore sua experiência com nossos serviços premium</p>
+            </div>
+            
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Café da Manhã</h3>
+                    <p>Buffet completo com opções locais e internacionais, servido diariamente das 6h às 10h30.</p>
+                    <p class="price">R$ 85/pessoa</p>
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label>
+                            <input type="checkbox" class="service-checkbox" data-service="breakfast" data-price="85"> Adicionar ao pacote
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3>Spa & Bem-estar</h3>
+                    <p>Massagens relaxantes e tratamentos estéticos em nosso spa de classe mundial.</p>
+                    <p class="price">A partir de R$ 250</p>
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label>
+                            <input type="checkbox" class="service-checkbox" data-service="spa" data-price="250"> Adicionar ao pacote
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-swimming-pool"></i>
+                    </div>
+                    <h3>Área de Lazer</h3>
+                    <p>Acesso à piscina aquecida, sauna e academia 24 horas durante sua estadia.</p>
+                    <p class="price">Incluso</p>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3>Transfer Executivo</h3>
+                    <p>Serviço de traslado do aeroporto para o hotel em veículos de luxo.</p>
+                    <p class="price">R$ 150/trecho</p>
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label>
+                            <input type="checkbox" class="service-checkbox" data-service="transfer" data-price="150"> Adicionar ao pacote
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Staff Section -->
+    <section class="section staff" id="staff">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossa Equipe</h2>
+                <p>Profissionais dedicados para tornar sua estadia inesquecível</p>
+            </div>
+            
+            <div class="staff-grid">
+                <!-- Staff 1 -->
+                <div class="staff-card">
+                    <div class="staff-img">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Ana Santos">
+                    </div>
+                    <div class="staff-info">
+                        <h3>Ana Santos</h3>
+                        <p class="staff-position">Gerente Geral</p>
+                        <p class="staff-shift">Segunda a Sexta, 8h às 18h</p>
+                    </div>
+                </div>
+                
+                <!-- Staff 2 -->
+                <div class="staff-card">
+                    <div class="staff-img">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Carlos Mendes">
+                    </div>
+                    <div class="staff-info">
+                        <h3>Carlos Mendes</h3>
+                        <p class="staff-position">Recepcionista</p>
+                        <p class="staff-shift">Terça a Sábado, 14h às 22h</p>
+                    </div>
+                </div>
+                
+                <!-- Staff 3 -->
+                <div class="staff-card">
+                    <div class="staff-img">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Mariana Costa">
+                    </div>
+                    <div class="staff-info">
+                        <h3>Mariana Costa</h3>
+                        <p class="staff-position">Chefe de Concierge</p>
+                        <p class="staff-shift">Quarta a Domingo, 10h às 18h</p>
+                    </div>
+                </div>
+                
+                <!-- Staff 4 -->
+                <div class="staff-card">
+                    <div class="staff-img">
+                        <img src="https://randomuser.me/api/portraits/men/76.jpg" alt="Roberto Almeida">
+                    </div>
+                    <div class="staff-info">
+                        <h3>Roberto Almeida</h3>
+                        <p class="staff-position">Supervisor de Limpeza</p>
+                        <p class="staff-shift">Diariamente, 7h às 16h</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Avaliações de Hóspedes</h2>
+                <p>O que nossos clientes dizem sobre nós</p>
+            </div>
+            
+            <div class="testimonial-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Ana Silva" class="testimonial-img">
+                        <div class="testimonial-author">
+                            <h4>Ana Silva</h4>
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p>"Fiquei impressionada com a atenção aos detalhes e o serviço impecável. A suíte presidencial superou todas as minhas expectativas. Com certeza voltarei!"</p>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Carlos Oliveira" class="testimonial-img">
+                        <div class="testimonial-author">
+                            <h4>Carlos Oliveira</h4>
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p>"O check-in digital foi muito prático e a localização do hotel é perfeita para quem está a negócios. O café da manhã tem uma variedade incrível de opções saudáveis."</p>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Mariana Costa" class="testimonial-img">
+                        <div class="testimonial-author">
+                            <h4>Mariana Costa</h4>
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p>"A equipe foi extremamente atenciosa e resolveu rapidamente um pequeno problema que tivemos com o ar condicionado. A decoração do hotel é sofisticada e aconchegante."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Sobre Nós</h3>
+                    <p>O Luxury Haven oferece uma experiência de hospedagem única, combinando conforto, elegância e serviço personalizado.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#rooms">Quartos</a></li>
+                        <li><a href="#services">Serviços</a></li>
+                        <li><a href="#staff">Funcionários</a></li>
+                        <li><a href="#testimonials">Avaliações</a></li>
+                        <li><a href="#contact">Contato</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Av. Beira Mar, 1234, Rio de Janeiro</li>
+                        <li><i class="fas fa-phone"></i> (21) 1234-5678</li>
+                        <li><i class="fas fa-envelope"></i> contato@luxuryhaven.com</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Assine nossa newsletter para receber ofertas exclusivas.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Seu e-mail" class="form-control" style="margin-bottom: 10px;">
+                        <button type="submit" class="btn">Assinar</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Luxury Haven. Todos os direitos reservados. | <a href="#">Política de Privacidade</a> | <a href="#">Termos de Uso</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Login</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">E-mail</label>
+                        <input type="email" id="login-email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Senha</label>
+                        <input type="password" id="login-password" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn">Entrar</button>
+                    <p style="text-align: center; margin-top: 15px;">Não tem uma conta? <a href="#" id="show-register">Cadastre-se</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="register-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Criar Conta</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="register-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="first-name">Nome</label>
+                            <input type="text" id="first-name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Sobrenome</label>
+                            <input type="text" id="last-name" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-email">E-mail</label>
+                        <input type="email" id="register-email" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="register-password">Senha</label>
+                            <input type="password" id="register-password" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm-password">Confirmar Senha</label>
+                            <input type="password" id="confirm-password" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Telefone</label>
+                        <input type="tel" id="phone" class="form-control" required>
+                    </div>
+                    
+                    <button type="submit" class="btn">Cadastrar</button>
+                    <p style="text-align: center; margin-top: 15px;">Já tem uma conta? <a href="#" id="show-login">Faça login</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="modal" id="booking-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Confirmar Reserva</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="booking-summary">
+                    <h3>Suíte Presidencial</h3>
+                    <div class="booking-dates">
+                        <p><strong>Check-in:</strong> <span id="summary-checkin">15/10/2023</span></p>
+                        <p><strong>Check-out:</strong> <span id="summary-checkout">20/10/2023</span></p>
+                        <p><strong>Noites:</strong> <span id="summary-nights">5</span></p>
+                    </div>
+                    
+                    <div class="booking-guests">
+                        <h4>Hóspedes</h4>
+                        <p><span id="summary-adults">2</span> Adultos, <span id="summary-children">0</span> Crianças</p>
+                    </div>
+                    
+                    <div class="booking-extras">
+                        <h4>Serviços Adicionais</h4>
+                        <ul id="selected-services">
+                            <li>Café da Manhã (2 pessoas) - R$ 170</li>
+                            <li>Transfer do Aeroporto - R$ 150</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="booking-total">
+                        <h4>Total</h4>
+                        <p><strong>Quarto (<span id="summary-nights2">5</span> noites):</strong> R$ <span id="room-total">6.000</span></p>
+                        <p><strong>Serviços:</strong> R$ <span id="services-total">320</span></p>
+                        <p><strong>Taxas:</strong> R$ <span id="fees-total">180</span></p>
+                        <p><strong>Total a pagar:</strong> R$ <span id="grand-total">6.500</span></p>
+                    </div>
+                    
+                    <div class="payment-options">
+                        <h4>Forma de Pagamento</h4>
+                        <div class="payment-methods">
+                            <label>
+                                <input type="radio" name="payment" checked> Cartão de Crédito
+                            </label>
+                            <label>
+                                <input type="radio" name="payment"> Pix
+                            </label>
+                            <label>
+                                <input type="radio" name="payment"> Boleto Bancário
+                            </label>
+                        </div>
+                        
+                        <div class="credit-card-form" style="margin-top: 20px;">
+                            <div class="form-group">
+                                <label for="card-number">Número do Cartão</label>
+                                <input type="text" id="card-number" class="form-control" placeholder="1234 5678 9012 3456">
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="card-expiry">Validade</label>
+                                    <input type="text" id="card-expiry" class="form-control" placeholder="MM/AA">
+                                </div>
+                                <div class="form-group">
+                                    <label for="card-cvv">CVV</label>
+                                    <input type="text" id="card-cvv" class="form-control" placeholder="123">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="card-name">Nome no Cartão</label>
+                                <input type="text" id="card-name" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="button" id="confirm-booking-btn" class="btn" style="width: 100%; margin-top: 20px;">Confirmar Reserva</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Modal -->
+    <div class="modal" id="review-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Avalie sua estadia</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="review-form">
+                    <div class="form-group">
+                        <label>Sua avaliação</label>
+                        <div class="rating">
+                            <input type="radio" id="star5" name="rating" value="5">
+                            <label for="star5"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star4" name="rating" value="4">
+                            <label for="star4"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star3" name="rating" value="3">
+                            <label for="star3"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star2" name="rating" value="2">
+                            <label for="star2"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star1" name="rating" value="1">
+                            <label for="star1"><i class="fas fa-star"></i></label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="review-title">Título</label>
+                        <input type="text" id="review-title" class="form-control" placeholder="Resuma sua experiência">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="review-comment">Comentário</label>
+                        <textarea id="review-comment" class="form-control" rows="5" placeholder="Conte mais sobre sua experiência..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn">Enviar Avaliação</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // Modal functionality
+        const loginBtn = document.getElementById('login-btn');
+        const registerBtn = document.getElementById('register-btn');
+        const loginModal = document.getElementById('login-modal');
+        const registerModal = document.getElementById('register-modal');
+        const bookingModal = document.getElementById('booking-modal');
+        const reviewModal = document.getElementById('review-modal');
+        const closeBtns = document.querySelectorAll('.close-modal');
+        const showRegister = document.getElementById('show-register');
+        const showLogin = document.getElementById('show-login');
+        const roomCards = document.querySelectorAll('.room-card');
+        const confirmBookingBtn = document.getElementById('confirm-booking-btn');
+        const availabilityForm = document.getElementById('availability-form');
+        const toast = document.getElementById('toast');
+        
+        // Open modals
+        loginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.style.display = 'block';
+        });
+        
+        registerBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            registerModal.style.display = 'block';
+        });
+        
+        // Switch between login and register
+        showRegister.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.style.display = 'none';
+            registerModal.style.display = 'block';
+        });
+        
+        showLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            registerModal.style.display = 'none';
+            loginModal.style.display = 'block';
+        });
+        
+        // Close modals
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                loginModal.style.display = 'none';
+                registerModal.style.display = 'none';
+                bookingModal.style.display = 'none';
+                reviewModal.style.display = 'none';
+            });
+        });
+        
+        // Open booking modal when clicking on available rooms
+        roomCards.forEach(card => {
+            const status = card.querySelector('.room-status');
+            if (status.classList.contains('available')) {
+                card.addEventListener('click', () => {
+                    // Update booking summary with form data
+                    const checkIn = document.getElementById('check-in').value;
+                    const checkOut = document.getElementById('check-out').value;
+                    const adults = document.getElementById('adults').value;
+                    const children = document.getElementById('children').value;
+                    
+                    if (checkIn && checkOut) {
+                        const checkInDate = new Date(checkIn);
+                        const checkOutDate = new Date(checkOut);
+                        const nights = Math.round((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
+                        
+                        document.getElementById('summary-checkin').textContent = formatDate(checkIn);
+                        document.getElementById('summary-checkout').textContent = formatDate(checkOut);
+                        document.getElementById('summary-nights').textContent = nights;
+                        document.getElementById('summary-nights2').textContent = nights;
+                        document.getElementById('summary-adults').textContent = adults;
+                        document.getElementById('summary-children').textContent = children;
+                        
+                        // Calculate room total
+                        const priceText = card.querySelector('.price').textContent;
+                        const price = parseInt(priceText.replace(/[^\d]/g, ''));
+                        const roomTotal = price * nights;
+                        
+                        document.getElementById('room-total').textContent = roomTotal.toLocaleString('pt-BR');
+                        
+                        // Calculate grand total
+                        const servicesTotal = 320; // This would be calculated from selected services
+                        const feesTotal = 180;
+                        const grandTotal = roomTotal + servicesTotal + feesTotal;
+                        
+                        document.getElementById('services-total').textContent = servicesTotal.toLocaleString('pt-BR');
+                        document.getElementById('fees-total').textContent = feesTotal.toLocaleString('pt-BR');
+                        document.getElementById('grand-total').textContent = grandTotal.toLocaleString('pt-BR');
+                    }
+                    
+                    bookingModal.style.display = 'block';
+                });
+            }
+        });
+        
+        // Format date as DD/MM/YYYY
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const day = date.getDate().toString().padStart(2, '0');
+            const month = (date.getMonth() + 1).toString().padStart(2, '0');
+            const year = date.getFullYear();
+            return `${day}/${month}/${year}`;
+        }
+        
+        // Show toast notification
+        function showToast(message, isSuccess = true) {
+            toast.textContent = message;
+            toast.style.backgroundColor = isSuccess ? '#2ecc71' : '#e74c3c';
+            toast.style.display = 'block';
+            
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+        
+        // Form submission
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            loginModal.style.display = 'none';
+            showToast('Login realizado com sucesso!');
+        });
+        
+        document.getElementById('register-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            registerModal.style.display = 'none';
+            showToast('Cadastro realizado com sucesso!');
+        });
+        
+        // Confirm booking
+        confirmBookingBtn.addEventListener('click', () => {
+            bookingModal.style.display = 'none';
+            showToast('Reserva confirmada com sucesso!');
+            
+            // Show review modal after 3 seconds
+            setTimeout(() => {
+                reviewModal.style.display = 'block';
+            }, 3500);
+        });
+        
+        // Submit review
+        document.getElementById('review-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            reviewModal.style.display = 'none';
+            showToast('Avaliação enviada com sucesso! Obrigado!');
+        });
+        
+        // Check availability form
+        availabilityForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Scroll to rooms section
+            document.getElementById('rooms').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // Service selection
+        const serviceCheckboxes = document.querySelectorAll('.service-checkbox');
+        const selectedServicesList = document.getElementById('selected-services');
+        
+        serviceCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateSelectedServices);
+        });
+        
+        function updateSelectedServices() {
+            selectedServicesList.innerHTML = '';
+            
+            serviceCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    const serviceName = checkbox.parentElement.parentElement.parentElement.querySelector('h3').textContent;
+                    const servicePrice = parseInt(checkbox.dataset.price);
+                    const adults = parseInt(document.getElementById('adults').value) || 2;
+                    
+                    // For breakfast, multiply by number of adults
+                    const totalPrice = checkbox.dataset.service === 'breakfast' ? servicePrice * adults : servicePrice;
+                    
+                    const li = document.createElement('li');
+                    li.textContent = `${serviceName} - R$ ${totalPrice}`;
+                    selectedServicesList.appendChild(li);
+                }
+            });
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+            if (e.target === registerModal) {
+                registerModal.style.display = 'none';
+            }
+            if (e.target === bookingModal) {
+                bookingModal.style.display = 'none';
+            }
+            if (e.target === reviewModal) {
+                reviewModal.style.display = 'none';
+            }
+        });
+        
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+        
+        // Responsive adjustments
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 992) {
+                navLinks.style.display = 'flex';
+            } else {
+                navLinks.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
